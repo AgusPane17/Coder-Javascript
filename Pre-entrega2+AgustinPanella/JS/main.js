@@ -108,6 +108,7 @@ const eliminarMangas = (arrayMangas) =>{
         `${listaAMostrar}
         ${i}- ${arrayMangas[i].nombre}`
     }
+    
     let eliminado = prompt(
         `Ingresa el numero del manga que quieres eliminar:
          ${listaAMostrar}`)// para mostrar la lista de los mangas que puede eliminar
@@ -115,7 +116,6 @@ const eliminarMangas = (arrayMangas) =>{
     arrayMangas[eliminado].quitarManga(elimina, 1, arrayMangas)//elimina un objeto de la lista de los mangas y reordena la lista
     visualizarMangas(arrayMangas)    
     menuInicio(arrayMangas)
-   
 }
 
 const buscarMangas = (arrayMangas) =>{
@@ -140,6 +140,48 @@ const buscarMangas = (arrayMangas) =>{
     menuInicio(arrayMangas)//Aca se realizo una funcion de busqueda de manga por nombre
 }
 
+    
+const botonCrearMangaFuncion = ()=> {
+    console.log(arrayMangas)
+    let mangaPorBoton = new manga();
+    mangaPorBoton.agregarManga();
+    mostrarMangas(arrayMangas);
+
+}
+
+//funciones
+
+const mostrarMangas = (arrayMangas) =>{
+    let mangasdiv = document.getElementById("mangas") 
+    mangasdiv.innerHTML=""
+    
+    // for (const manga of arrayMangas){ Esta linea me genero problemas pero no se como solucionarlos 
+        for (let i = 0; i < arrayMangas.length; i++){
+        // //en esta20 lineas se utilizan para mostrar los objetos manga
+            let mangaContenido = document.createElement('div');
+            mangaContenido.innerHTML = `<div class="card" style="width: 18rem;">
+                                            <img src="..." class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${arrayMangas[i].nombre}</h5>
+                                                <p class="card-text">${arrayMangas[i].descripcion}</p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">${arrayMangas[i].estado}</li>
+                                                <li class="list-group-item">${arrayMangas[i].genero}</li>
+                                                <li class="list-group-item">${arrayMangas[i].cantCapManga}</li>
+                                                <li class="list-group-item">${arrayMangas[i].puntuacion}</li>
+                                            </ul>
+                                        
+                                        </div>`
+        mangasdiv.appendChild(mangaContenido)
+                                   
+        }
+    }
+
+//botones
+
+let botonCrearManga = document.getElementById("botonCrearManga")
+ botonCrearManga.addEventListener("click", botonCrearMangaFuncion);
 
 
 //aca dejo algunos mangas precargados para que puedan probar las funcionalidades
@@ -166,4 +208,5 @@ console.log(arrayMangas[2]);
 
 
 alert(`Bienvien@ a mi pagina para gestionar tus lecturas de mangas. Aca podras guardar y gestionar tus mangas que leas o quieras leer.`)
-menuInicio(arrayMangas);//inicio del programa
+//menuInicio(arrayMangas);//inicio del programa
+mostrarMangas(arrayMangas);

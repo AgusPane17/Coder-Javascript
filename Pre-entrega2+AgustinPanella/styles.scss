@@ -4,8 +4,9 @@ $color3: #59C1BD;
 $color4: #0D4C92;
 
 
-.botonrojo{
-  background-color: red;
+body{
+  display: flex;
+  justify-content: space-between;
 }
 
 .navbar{
