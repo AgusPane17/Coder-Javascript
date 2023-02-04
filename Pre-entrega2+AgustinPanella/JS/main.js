@@ -1,4 +1,5 @@
-
+let arrayMangas = []
+localStorage.setItem("arrayMangas", JSON.stringify(arrayMangas));
 //Objetos
 class manga{
     
@@ -76,7 +77,7 @@ const visualizarMangas = (arrayMangas)=>{
     alert(`Los mangas que tienes en la lista son:
             ${listaAMostrar}`
     )
-    menuInicio(arrayMangas)// en esta funcion se muestra todos los mangas cargados
+    mostrarMangas(arrayMangas)// en esta funcion se muestra todos los mangas cargados
 }
 
 const agregarMangasALista = (arrayMangas) =>{
@@ -97,10 +98,11 @@ const agregarMangasALista = (arrayMangas) =>{
          La cantidad de capitulos leidos es: ${cantCapitulosLeidos} 
          Su genero es: ${genero} 
          Y tiene una puntuacion : ${puntuacion}`)
-    visualizarMangas(arrayMangas)//agrega los mangas nuevos y los muestra en la lista
-    menuInicio(arrayMangas)
+    
+         //agrega los mangas nuevos y los muestra en la lista
+    mostrarMangas(arrayMangas)
+    return arrayMangas
 }
-
 const eliminarMangas = (arrayMangas) =>{
     let listaAMostrar = ""
     for (let i = 0; i < arrayMangas.length; i++) {
@@ -115,7 +117,7 @@ const eliminarMangas = (arrayMangas) =>{
     console.
     arrayMangas[eliminado].quitarManga(elimina, 1, arrayMangas)//elimina un objeto de la lista de los mangas y reordena la lista
     visualizarMangas(arrayMangas)    
-    menuInicio(arrayMangas)
+    mostrarMangas(arrayMangas)
 }
 
 const buscarMangas = (arrayMangas) =>{
@@ -149,49 +151,94 @@ const botonCrearMangaFuncion = ()=> {
 
 }
 
-//funciones
+      
+const botonAlfabeticamenteFuncion = (arrayMangas)=>{
+    let mangaOrdenado = []
+    mangaOrdenado = mangaOrdenado.concat(arrayMangas)
+    
+    mangaOrdenado.sort((mangaA,mangaB) => {
+        if (mangaA.nombre > mangaB.nombre){
+            return 1
+        }
+        if (mangaB.nombre > mangaA.nombre){
+            return -1
+        }
+        return 0
+      });
+      for (let orden of mangaOrdenado){
+        console.log(orden.nombre)
+        }
+        mostrarMangas(mangaOrdenado);   
+}
 
-const mostrarMangas = (arrayMangas) =>{
+
+const mostrarMangas = (arrayM) =>{
     let mangasdiv = document.getElementById("mangas") 
     mangasdiv.innerHTML=""
     
     // for (const manga of arrayMangas){ Esta linea me genero problemas pero no se como solucionarlos 
-        for (let i = 0; i < arrayMangas.length; i++){
+        for (let i = 0; i < arrayM.length; i++){
+            
         // //en esta20 lineas se utilizan para mostrar los objetos manga
             let mangaContenido = document.createElement('div');
             mangaContenido.innerHTML = `<div class="card" style="width: 18rem;">
-                                            <img src="..." class="card-img-top" alt="...">
+                                            <img src="..." class="card-img- top" alt="...">
                                             <div class="card-body">
-                                                <h5 class="card-title">${arrayMangas[i].nombre}</h5>
-                                                <p class="card-text">${arrayMangas[i].descripcion}</p>
+                                                <h5 class="card-title">${arrayM[i].nombre}</h5>
+                                                <p class="card-text">${arrayM[i].descripcion}</p>
                                             </div>
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">${arrayMangas[i].estado}</li>
-                                                <li class="list-group-item">${arrayMangas[i].genero}</li>
-                                                <li class="list-group-item">${arrayMangas[i].cantCapManga}</li>
-                                                <li class="list-group-item">${arrayMangas[i].puntuacion}</li>
+                                                <li class="list-group-item">El estado es: ${arrayM[i].estado}</li>
+                                                <li class="list-group-item">Su genero es: ${arrayM[i].genero}</li>
+                                                <li class="list-group-item">Has leido: ${arrayM[i].cantCapitulosLeidos} capitulos</li>
+                                                <li class="list-group-item">Tu puntuacion: ${arrayM[i].puntuacion}</li>
                                             </ul>
                                         
                                         </div>`
         mangasdiv.appendChild(mangaContenido)
-                                   
+        console.log(arrayM[i].nombre)
         }
+        
     }
+
+
+
+
 
 //botones
 
 let botonCrearManga = document.getElementById("botonCrearManga")
- botonCrearManga.addEventListener("click", botonCrearMangaFuncion);
+    botonCrearManga.addEventListener("click", function () {
+        agregarMangasALista(arrayMangas);
 
+    });
+
+
+// let botonAlfabeticamente = document.getElementById("botonAlfabeticamente")
+// botonAlfabeticamente.addEventListener("click", function () {
+//     botonAlfabeticamenteFuncion(arrayMangas);
+//   }
+// );
+let selector = document.getElementById("selectOrden")
+
+selector.addEventListener("change",function(){
+    const indicadorSelector = selector.value;
+    if (indicadorSelector === "alf"){
+        botonAlfabeticamenteFuncion(arrayMangas);
+    }
+    if (indicadorSelector === "def"){
+        mostrarMangas(arrayMangas)
+    }
+})
 
 //aca dejo algunos mangas precargados para que puedan probar las funcionalidades
 
-let arrayMangas = []
+
 const manga1 = new manga("One piece","Es un anime que se centra en la gran era pirata, una historia llena de aventura y diversion.", "Emisión", 600, "Shonen - Aventura", "9");
-arrayMangas.push(manga1)
+manga1.agregarManga();
 const manga2 = new manga("Jujutsu Kaisen", "El mundo de la magia, donde los hechiceros y las brujas luchan contra maldiciones para poder mantener el equilibrio del mundo","Emisión", 211, "Shonen-Seinen", "8");
 manga2.agregarManga();
-const manga3 = new manga("Shingeki no kiojin","Epicas batallas de bichos gigantes","emision", 600, "Shonen - Aventura", "9");
+const manga3 = new manga("Shingeki no kiojin","Epicas batallas de bichos gigantes","emision", 90, "Shonen - Aventura", "9");
 manga3.agregarManga();
 const manga4 = new manga("Kaguya-Sama", "Amor de preparatoria, en donde los protagonistas no pueden declarar sus sentimientos por miedo a que piensen que sean debiles", "Emisión", 78, "Romance-Escolar", "8");
 manga4.agregarManga();
@@ -199,14 +246,12 @@ const manga5 = new manga("Blue Lock", "Futbol, ser el mejor, lograr ser el prime
 manga5.agregarManga();
 
 
-console.log(arrayMangas[2]);
+
 
 
 //crearVariables
 
 
-
-
-alert(`Bienvien@ a mi pagina para gestionar tus lecturas de mangas. Aca podras guardar y gestionar tus mangas que leas o quieras leer.`)
 //menuInicio(arrayMangas);//inicio del programa
 mostrarMangas(arrayMangas);
+

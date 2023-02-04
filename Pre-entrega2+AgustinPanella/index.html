@@ -25,19 +25,25 @@
         </nav>
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <button id="botonCrearManga" class="btn btn-primary">Generar lista</button>
-          </li>
-          <li class="nav-item">
             <button id="botonCrearManga" class="btn btn-primary">Crear Manga</button>
           </li>
+          <!-- <li class="nav-item">
+                  <button id="botonAlfabeticamente" class="btn btn-primary">Alfabeticamente</button>
+                </li> -->
           <li class="nav-item dropdown">
             <ul>
+
+
+
+
               <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Ordenar por:</option>
-                <option value="1">Mayor a menor</option>
-                <option value="2">Menor a mayor</option>
-                <option value="3">Alfabeticamente</option>
+                <option value="def"selected>Ordenar por:</option>
+                <option value="alf"> Alfabeticamente </option>
+
               </select>
+
+
+              
             </ul>
           </li>
   
@@ -49,6 +55,7 @@
 
     
     <main class="main">
+      <p class="bienvenida">Bienvien@ a mi pagina para gestionar tus lecturas de mangas. Aca podras guardar y gestionar tus mangas que leas o quieras leer.</p>
       <!-- Aca contiene cada uno de los mangas que se creen -->
       <div class="mangas"id="mangas">
 
