@@ -1,10 +1,13 @@
 
 
-// validar array en el storage
+// validar en el storage los datos necesarios
+
+// array donde contengo mangas
 if (!JSON.parse(localStorage.getItem("arrayMangas"))) {
     // Si no existe, lo crea como un array vacío
     localStorage.setItem("arrayMangas", JSON.stringify([]));
 }
+// variable para llevar un contador de los mangas que exiten
 if (!JSON.parse(localStorage.getItem("nextMangaNumero"))) {
     // Si no existe, lo crea como un array vacío
     let nextMangaNumero = 0
@@ -13,6 +16,8 @@ if (!JSON.parse(localStorage.getItem("nextMangaNumero"))) {
 // localStorage.setItem("arrayMangas", JSON.stringify(arrayMangas));
 let arrayMangas = JSON.parse(localStorage.getItem("arrayMangas"));
 //Objetos
+
+
 class manga{
     constructor(nombre,imagen, descripcion, estado, cantCapitulosLeidos, genero, puntuacion){
 
@@ -49,31 +54,10 @@ class manga{
 //funcionese
 
 
-
-
-
-
-// document.getElementById("buscadorInput").addEventListener("input", function() {
-//     // aquí se coloca la función de búsqueda
-//   });
-
-
-
-
-
-
 //agrega los mangas nuevos y los muestra en la lista
 const agregarMangasALista = (nombre,imagen,descripcion, estado,cantCapitulosLeidos,genero,puntuacion) =>{
     
 
-    // let nombre = prompt("Ingresa un nombre")
-    // let descripcion = prompt("Ingresa una descripcion")
-    // let estado = prompt("Ingresa un estado. puede ser finalizado o en emision")
-    // estado = estado.toLowerCase()
-    // let imagen = prompt("Ingresa un url de tu manga")
-    // let cantCapitulosLeidos = prompt("Ingresa la cantidad de capitulos que has leido")
-    // let genero = prompt("Ingresa el genero")
-    // let puntuacion = prompt("Ingresa una puntuacion del 1 al 10")
     let mangaNuevo = new manga(nombre,imagen,descripcion, estado,cantCapitulosLeidos,genero,puntuacion)//pido datos y creo el objeto
     
     mangaNuevo.agregarManga() 
@@ -89,7 +73,7 @@ const agregarMangasALista = (nombre,imagen,descripcion, estado,cantCapitulosLeid
     mostrarMangas()
 
 }
-
+// muestra los mangas por defecto
 const mostrarMangas = () =>{
     let mangasdiv = document.getElementById("mangas") 
     mangasdiv.innerHTML=""
@@ -118,7 +102,7 @@ const mostrarMangas = () =>{
         }
 
 }
-
+// elimina la lista de mangas
 const eliminarMangas = () =>{
     let arrayMangas = JSON.parse(localStorage.getItem("arrayMangas"))
     arrayMangas = []
@@ -174,6 +158,7 @@ const mostrarMangasOrdenado = (mangaOrdenado) =>{
         
         }
 }
+// funcion designada para buscar los mangas en el buscador
 function buscarManga(valor, mangas) {
     if (valor != null){
         return mangas.filter(manga => manga.nombre.toLowerCase().includes(valor.toLowerCase()));}
@@ -182,7 +167,7 @@ function buscarManga(valor, mangas) {
         mangasdiv.innerHTML="No se encontro ninguna coincidencia"
     }
 }
-
+// muestra los mangas buscados
 const mostrarMangasBusqueda = (mangaBuscado) =>{
     let mangasdiv = document.getElementById("mangas") 
     mangasdiv.innerHTML=""
@@ -212,16 +197,6 @@ const mostrarMangasBusqueda = (mangaBuscado) =>{
 
 
 //botones
-
-let inputNombreManga = document.getElementById("inputNombreManga")
-let inputDescripcionManga = document.getElementById("inputDescripcionManga")
-let inputImagenManga = document.getElementById("inputImagenManga")
-let inputEstadoManga = document.getElementById("inputEstadoManga")
-let inputManga = document.getElementById("inputMangaCantCapitulosLeidos")
-let inputGeneroManga = document.getElementById("inputGeneroManga")
-let inputPuntuacionManga = document.getElementById("inputPuntuacionManga")
-
-
 
 let botonCrearManga = document.getElementById("botonCrearManga")
     botonCrearManga.addEventListener("click", function () {
@@ -270,7 +245,6 @@ botonSaveManga.addEventListener("click", function() {
 
 
 let buscador = document.getElementById("buscador");
-
 buscador.addEventListener("input", function() {
     let resultados = buscarManga(this.value, arrayMangas);
 
@@ -316,9 +290,6 @@ function cargarObjetos(){//creo funcion para poder ya tener precargados algunos 
       
     }
 }
-
-
-
 
 cargarObjetos()
 mostrarMangas();
