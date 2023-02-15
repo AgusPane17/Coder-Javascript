@@ -1,0 +1,10 @@
+{
+    "mangas": [
+
+    {"nombre":"Shingueki no kioji",
+    "estado":"finalizado",
+    "cantDeCapitulos": 139,
+    "imagen": "../iconos/SNK.jpg"
+    }
+    ]
+}
