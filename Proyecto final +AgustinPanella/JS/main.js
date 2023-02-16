@@ -30,7 +30,9 @@ class manga{
         this.puntuacion = puntuacion;//medida del uno al 10
         let auxiliar =JSON.parse(localStorage.getItem("nextMangaNumero"))
         auxiliar=parseInt(auxiliar)
-        this.numero = auxiliar++
+        console.log("El nextMangas es :"+ auxiliar)
+        this.numero = auxiliar
+        auxiliar = auxiliar+1
         localStorage.setItem("nextMangaNumero", JSON.stringify(auxiliar));
     }
     //metodos
@@ -52,7 +54,6 @@ class manga{
 }
 
 //funcionese
-
 
 //agrega los mangas nuevos y los muestra en la lista
 const agregarMangasALista = (nombre,imagen,descripcion, estado,cantCapitulosLeidos,genero,puntuacion) =>{
@@ -112,6 +113,63 @@ const eliminarMangas = () =>{
     localStorage.setItem("nextMangaNumero", JSON.stringify(contadorDeMangas));
     mostrarMangas()
 }
+
+
+
+
+
+
+
+const eliminarMangas2 = () =>{
+    let mangasdiv = document.getElementById("auxialiarModal")
+    mangasdiv.innerHTML = ""
+    let mangasAEliminar =  JSON.parse(localStorage.getItem("arrayMangas"))
+    
+    for (let mostrarEliminados of mangasAEliminar){
+        let mangaContenido = document.createElement('div');
+        mangaContenido.innerHTML += 
+                                    `<div id="mangaEliminar${mostrarEliminados.numero}">
+                                        <h5>${mostrarEliminados.nombre}</h5>
+                                        <button id="botonEliminar${mostrarEliminados.numero}" class="card-body__botonEliminar">
+                                            <img class="card-body__botonEliminar__iconoeliminar" src="./iconos/elimanarIncon.png" alt="" srcset="">
+                                        </button>
+                    
+                                    </div>
+                                    `
+        mangasdiv.appendChild(mangaContenido)                            
+    }
+
+    mangasAEliminar.forEach((mostrarEliminados) => {
+        // 
+        document.getElementById(`botonEliminar${mostrarEliminados.numero}`).addEventListener("click", ()=>{
+            console.log("merequetengue")
+            let mangaCard = document.getElementById(`mangaEliminar${mostrarEliminados.numero}`)
+            mangaCard.remove()
+
+            let mangaEliminado = mangasAEliminar.find(manguita => manguita.numero == mostrarEliminados.numero)
+            console.log(mangaEliminado)
+
+            let posicionM = mangasAEliminar.indexOf(mangaEliminado)
+            console.log(posicionM)
+            mangasAEliminar.splice(posicionM,1)
+            localStorage.setItem("arrayMangas",JSON.stringify(mangasAEliminar))
+            let contadorMangaBajado =  JSON.parse(localStorage.getItem("nextMangaNumero"))
+            contadorMangaBajado = contadorMangaBajado  -1
+            
+            localStorage.setItem("nextMangaNumero",JSON.stringify(contadorMangaBajado))
+
+        })
+        
+    });
+}
+
+let auxiliar = document.getElementById("auxiliar")
+auxiliar.addEventListener("click", function(){
+    eliminarMangas2( ) 
+})
+
+
+
 
 
 // Muestra la lista pero de forma por defecto
@@ -196,9 +254,7 @@ const mostrarMangasBusqueda = (mangaBuscado) =>{
         
         }
 }
-
 //aca dejo algunos mangas precargados para que puedan probar las funcionalidades
-
 function cargarObjetos(){//creo funcion para poder ya tener precargados algunos mangas
     
     if(!JSON.parse(localStorage.getItem("precargado"))) {
