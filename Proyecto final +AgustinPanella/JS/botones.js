@@ -27,28 +27,10 @@ let botonCrearManga = document.getElementById("botonCrearManga")
 
     });
 
-let botonSaveManga = document.getElementById("botonSaveManga")
-botonSaveManga.addEventListener("click", function() {
-
-    let nombre= document.getElementById("inputNombreManga").value;
-    let descripcion= document.getElementById("inputDescripcionManga").value;
-    let imagen= document.getElementById("inputImagenManga").value;
-    let  estado= document.getElementById("inputEstadoManga").value;
-    let cantCapitulosLeidos= document.getElementById("inputMangaCantCapitulosLeidos").value;
-    let genero= document.getElementById("inputGeneroManga").value;
-    let puntuacion= document.getElementById("inputPuntuacionManga").value;
-
-    
-    agregarMangasALista(nombre,imagen,descripcion, estado,cantCapitulosLeidos,genero,puntuacion)
-
-})
-
-
 // input relacionado al buscador de mangas
 let buscador = document.getElementById("buscador");
 buscador.addEventListener("input", function() {
     let resultados = buscarManga(this.value, arrayMangas);
-
     mostrarMangasBusqueda(resultados)
   });
 
@@ -65,10 +47,11 @@ selector.addEventListener("change",function(){
     }
 })
 
-let botoneliminar = document.getElementById("botonEliminarManga")
-botoneliminar.addEventListener("click", function () {
-    let arrayMangas = JSON.parse(localStorage.getItem("arrayMangas"))
-
-    arrayMangas != null ? eliminarMangas() : alert ("No hay mangas que eliminar")    
-    
+let misMangas = document.getElementById("misMangas")
+misMangas.addEventListener("click",function(){
+    mostrarMisMangas() 
 })
+
+
+
+

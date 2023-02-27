@@ -67,10 +67,6 @@ body {
 }
 
 
-
-
-
-
 // main
 .main {
   background-color: #cff5e7;
@@ -80,6 +76,7 @@ body {
 
   height: auto;
   padding: 10%;
+  padding-top: 5%;
 }
 
 .bienvenida {
@@ -93,7 +90,7 @@ body {
 .mangas {
   display: grid;
   grid-template-columns: repeat((3, 1fr)); /* 3 columnas con tamaño igual */
-  grid-gap: 15%; /* separacion de 10px entre los objetos */
+  grid-gap: 10% ; /* separacion de 10px entre los objetos */
 
   background-color: $color1;
   padding: 10%;
@@ -115,7 +112,17 @@ body {
   width: 1rem;
 }
 
-
+// .card-body__boton{
+//   cursor: pointer;
+//   background-color: $color1;
+//   margin-top:1rem;
+//   margin-left: 5rem;
+//   margin-bottom: 1rem;
+//   margin-right: 1rem;
+//   border-radius: 1rem;
+//   border-width: 1px;
+//   border-color: #0d4c92;
+// }
 
 
 // fooder
