@@ -10,6 +10,9 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
+" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
 
     <title>MANGAWISE</title>
@@ -24,112 +27,16 @@
       </nav>
 
       <ul class="nav nav-pills">
-        <!-- Button trigger modal -->
-        <button
-          type="button"
-          id="botonEliminarManga"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          Eliminar Manga
+        <button type="button" id="botonBiblioteca" class="btn btn-primary">
+          Biblioteca
         </button>
-        <button
-          type="button"
-          id="misMangas"
-          class="btn btn-primary"
-        >
+
+        <button type="button" id="misMangas" class="btn btn-primary">
           Mis Mangas
         </button>
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div id="auxialiarModal" class="modal-body"></div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <button
-          type="button"
-          id="botonCrearManga"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          Crear Manga
-        </button>
-<!-- ESTE MODAL SERA CUANDO TENGA QUE COMPLETAR LOS MANGAS QUE QUIERO AGREGAR -->
-        <!-- Modal -->
-        <!-- <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Ingresa los datos
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body" id="crearMangaDiv"></div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="botonSaveManga"
-                >
-                  Guardar Manga
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- 
-        <button id="botonEliminarManga" type="button" class="btn btn-primary">
-          Eliminar
-        </button> -->
-
+        
+<!-- 
         <li class="nav-item dropdown">
           <select
             id="selectOrden"
@@ -146,16 +53,22 @@
           type="text"
           id="buscador"
           placeholder="Buscar manga"
-        />
+        /> -->
+
+
       </ul>
     </header>
     <main class="main">
-      <p class="bienvenida">
-        Bienvien@ a mi pagina para gestionar tus lecturas de mangas. Aca podras
-        guardar y gestionar tus mangas que leas o quieras leer.
-      </p>
+
+      
+      <div id="contenedorAuxiliar">
+        
+      </div>
+      
       <!-- Aca contiene cada uno de los mangas que se creen -->
-      <div class="mangas" id="mangas"></div>
+      <div class="mangas" id="mangas">
+
+      </div>
     </main>
 
     <footer class="footer">
@@ -167,11 +80,13 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-    <script src="JS/class.js"></script>
-    <script src="JS/botones.js"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js
+    "></script>
+    <script src="./JS/class.js"></script>
+    <script src="./JS/botones.js"></script>
+    <script src="./JS/funciones.js"></script>
+    <script src="./JS/main.js"></script>
 
-    <script src="JS/main.js"></script>
-
-    <!-- <script src="JS/botones.js"></script> -->
   </body>
 </html>

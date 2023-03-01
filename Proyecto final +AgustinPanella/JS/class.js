@@ -1,5 +1,5 @@
 class manga{
-    constructor(nombre,imagen, descripcion, estado, cantCapitulosLeidos, genero, puntuacion){
+    constructor(nombre,imagen, descripcion, estado, cantCapitulosLeidos, genero, puntuacion,numero){
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -7,16 +7,21 @@ class manga{
         this.cantCapitulosLeidos = cantCapitulosLeidos;
         this.genero = genero;
         this.puntuacion = puntuacion;
+        this.numero = parseInt(numero)
     }
+
+
+
+
     agregarManga(){
         let arrayMangas = JSON.parse(localStorage.getItem("arrayMangas"))
         arrayMangas.push(this);
         localStorage.setItem("arrayMangas", JSON.stringify(arrayMangas));
-    
     }
-    quitarManga(numIndice, num,arrayMangas){
-        arrayMangas.splice(numIndice, num)
-    }
+    // }
+    // quitarManga(numIndice, num,arrayMangas){
+    //     arrayMangas.splice(numIndice, num)
+    // }
     
     
 }

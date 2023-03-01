@@ -33,17 +33,21 @@ body {
   width: 20px;
 }
 
-.form-select {
-  display: block;
+.botonOrdenar {
+  display: flex;
   border: #0d6efd;
   // margin-left: -1rem;
-  width: 100%;
+  width: 15%;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: white;
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
+  margin-right: 1rem;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
   // background-size: 16px 12px;
 }
 
@@ -53,7 +57,23 @@ body {
 // }
 .buscador {
   height: auto;
+  width: 15%;
+  text-align: center;
+  margin-left: 1rem;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
 }
+
+.filtros{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+}
+
+
 .nav {
   background-color: #59c1bd;
   display: flex;
@@ -65,6 +85,22 @@ body {
 .btn {
   border-radius: 0px;
 }
+
+.botonDeManga{
+  cursor: pointer;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-left: 5rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border-width: 1px;
+  border-style: solid;
+}
+
+
+
+
+
 
 
 // main

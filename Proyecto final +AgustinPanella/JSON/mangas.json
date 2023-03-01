@@ -1,9 +1,9 @@
 [
-    {"nombre":"Shingueki no kioji",
+    {"nombre":"Shingeki no kiojin",
             "descripcion":"Pelea epica de bichos titanicos",
             "estado":"Finalizado",
             "ultimoCapitulo": 139,
-            "imagen": "../iconos/onepiece.png",
+            "imagen": "../iconos/SnK2.png",
             "genero":"Shonen",
             "numero":1},
 
