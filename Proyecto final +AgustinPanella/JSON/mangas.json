@@ -1,10 +1,52 @@
-{
-    "mangas": [
+[
+    {"nombre":"Shingeki no kiojin",
+            "descripcion":"Pelea epica de bichos titanicos",
+            "estado":"Finalizado",
+            "ultimoCapitulo": 139,
+            "imagen": "../iconos/SnK2.png",
+            "genero":"Shonen",
+            "numero":1},
 
-    {"nombre":"Shingueki no kioji",
-    "estado":"finalizado",
-    "cantDeCapitulos": 139,
-    "imagen": "../iconos/SNK.jpg"
-    }
-    ]
-}
+    {"nombre":"One Piece",
+            "descripcion":"Luffy el pirata y sus aventuras",
+            "estado":"Emision",
+            "ultimoCapitulo":1050,
+            "imagen": "../iconos/onepiece.png",
+            "genero":"Shonen",
+            "numero":2
+        },
+
+    {
+    "nombre":"Jujutsu kaisen",
+            "descripcion":"Hechiceros y maldiciones fajandose",
+            "estado":"Emision",
+            "ultimoCapitulo": 214,
+            "imagen": "../iconos/JJK.jpg",
+            "genero":"Shonen",
+            "numero":3},
+    {
+    "nombre":"Kimetsu no yaiba",
+            "descripcion":"Cazadores de demonios contra demonios",
+            "estado":"Finalizado",
+            "ultimoCapitulo": 205,
+            "imagen": "../iconos/kimetsunoyaiba.jpg",
+            "genero":"Shonen",
+            "numero":4}    ,
+    {
+     "nombre":"FullMetal Alchemist",
+            "descripcion":"Dos hermanos con poderes de alquimia y buscan como traer de vuelta a su madre",
+            "estado":"Finalizado",
+            "ultimoCapitulo": 109,
+            "imagen": "../iconos/FMA.jpg",
+            "genero":"Shonen",
+            "numero":5},
+    {
+    "nombre":"Chainsaw Man",
+            "descripcion":"El pibe motocierra se vuelve devil hunter y se madrea a bichos demoniacos",
+            "estado":"Emision",
+            "ultimoCapitulo": 120,
+            "imagen": "../iconos/chainsawman.jpg",
+            "genero":"Shonen",
+            "numero":6}                               
+        
+]
