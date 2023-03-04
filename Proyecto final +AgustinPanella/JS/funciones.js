@@ -101,6 +101,7 @@ const misMangas = () => {
                         />
                         </div>
                             `
+
     contenedorAuxiliar.appendChild(bienvenida)
 
     let selector = document.getElementById("selectOrden")
@@ -184,7 +185,7 @@ buscador.addEventListener("input", function(){
                                                 
                                                 <li class="list-group-item">Le diste una puntuacion de: ${mangas.puntuacion}</li>
                                             </ul>
-                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Completar Datos</button>
+                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Editar Datos</button>
                                                 
 
                                                     <!-- Modal -->
@@ -291,34 +292,6 @@ buscador.addEventListener("input", function(){
     });  
 }
 
-const mostrarMangas = (arrayMangas) =>{
-    let mangasdiv = document.getElementById("mangas") 
-    mangasdiv.innerHTML=""
-    for(let mangas of arrayMangas){
-        
-        let mangaContenido = document.createElement('div');
-        mangaContenido.innerHTML = `<div class="card" style="width: 18rem;">
-                                            <img src="${mangas.imagen}" class="card-img- top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${mangas.nombre}</h5>
-                                                <p class="card-text">${mangas.descripcion}</p>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">El estado es: ${mangas.estado}</li>
-                                                <li class="list-group-item">Su genero es: ${mangas.genero}</li>
-                                                <li class="list-group-item">Contiene: ${mangas.ultimoCapitulo} capitulos</li>
-                                            </ul>
-                                            <button value="${mangas.nombre}" _id 1="${mangas.nombre} type="button" class="btn btn-outline-success add">Agregar este manga</button>
-                                        </div>`
-        
-    mangasdiv.appendChild(mangaContenido)
-    } 
-    
-    
-}
-
-
-
 
 
 // Muestra la lista pero de forma por defecto
@@ -404,7 +377,7 @@ const mostrarMangasOrdenado = (mangaOrdenado) =>{
                                                 
                                                 <li class="list-group-item">Le diste una puntuacion de: ${mangas.puntuacion}</li>
                                             </ul>
-                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Completar Datos</button>
+                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Editar Datos</button>
                                                 
 
                                                     <!-- Modal -->
@@ -517,7 +490,7 @@ const mostrarMangasBusqueda = (mangaBuscado) =>{
                                                 
                                                 <li class="list-group-item">Le diste una puntuacion de: ${mangas.puntuacion}</li>
                                             </ul>
-                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Completar Datos</button>
+                                            <button id="configManga${mangas.numero}" type="button" class="btn btn-outline-secondary botonDeManga" data-bs-toggle="modal" data-bs-target="#exampleModal${mangas.numero}"> Editar Datos</button>
                                                 
 
                                                     <!-- Modal -->
