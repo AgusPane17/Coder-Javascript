@@ -8,8 +8,7 @@ y te dejara almacenar los mangas que vos quisieras para poder gestionar su lectu
 Esta pagina cuenta con los siguientes elementos.
 
 - El agregar un manga a tu lista
-- El poder contabilizar la cantidad de capitos que has leido 
-- El poder eliminar los mangas de tu lista que ya no desees tener. 
+- Editar los mangas que e leido o quiero leer 
 
 En resumen ese es el funcionamiento del proyecto. 
 
