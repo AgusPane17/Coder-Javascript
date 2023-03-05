@@ -1,5 +1,4 @@
 
-// Esta es la funcion que se ocupa para amostrar 
 const getMangaArrayJson = async () =>{
     const response = await fetch('./JSON/mangas.json')
     data = await response.json();
@@ -54,11 +53,8 @@ const getMangaArrayJson = async () =>{
             
 
 
-            if (!auxiliarRepetido){
-                
-            
-            
-                let mangaNuevo = new manga(mangas.nombre, mangas.imagen, mangas.descripcion, mangas.estado, null, mangas.genero, null, mangas.numero)
+            if (!auxiliarRepetido){            
+                let mangaNuevo = new manga(mangas.nombre, mangas.imagen, mangas.descripcion, mangas.estado, null, mangas.genero, null, mangas.numero, mangas.ultimoCapitulo)
                 mangaNuevo.agregarManga()
             // Confirmacion grafica sweetalert
                 Swal.fire({
@@ -69,15 +65,20 @@ const getMangaArrayJson = async () =>{
                     timer: 1500
                 })
             }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Este manga ya fue agregado, intenta de nuevo',
+                  })
+            }
 
         })
     })
 }
+const listaMisMangas = () => {
 
-
-const misMangas = () => {
-
-
+    // edito el DOM para adecuarlo al nuevo 
     let contenedorAuxiliar = document.getElementById("contenedorAuxiliar")
     contenedorAuxiliar.innerHTML = ""
 
@@ -103,9 +104,9 @@ const misMangas = () => {
                             `
 
     contenedorAuxiliar.appendChild(bienvenida)
-
+    // botones que gestionan 
     let selector = document.getElementById("selectOrden")
-selector.addEventListener("change",function(){
+    selector.addEventListener("change",function(){
     const indicadorSelector = selector.value;
     if (indicadorSelector === "alf"){
         botonAlfabeticamenteFuncion();
@@ -113,15 +114,16 @@ selector.addEventListener("change",function(){
     if (indicadorSelector === "def"){
         mostrarMangas()
     }
-})
-let buscador = document.getElementById("buscador");
-buscador.addEventListener("input", function(){
+    })
+    let buscador = document.getElementById("buscador");
+    buscador.addEventListener("input", function(){
     let resultados = buscarManga(this.value);
     if (resultados){
         mostrarMangasBusqueda(resultados)}
-  }
-  ); 
+    }
+    ); 
 
+    //aca empieza a mostrar los mangas guardados 
     let mangasdiv = document.getElementById("mangas") 
     mangasdiv.innerHTML=""
     let arrayMangasSave = JSON.parse(localStorage.getItem("arrayMangas"))
@@ -151,13 +153,13 @@ buscador.addEventListener("input", function(){
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                                <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
-                                                                                <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                            <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
+                                                            <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
+                                                            <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
+                                                            <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>
@@ -198,12 +200,12 @@ buscador.addEventListener("input", function(){
                                                         </div>
                                                         <div class="modal-body">
                                                                                 <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
+                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
                                                                                 <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>
@@ -214,10 +216,9 @@ buscador.addEventListener("input", function(){
                                         </div>`
         
             mangasdiv.appendChild(mangaContenido)
-        }
-        
-        
+        }    
     }  
+
 
     // modifica el manga guardado
     arrayMangasSave.forEach((mangas) => {
@@ -225,30 +226,43 @@ buscador.addEventListener("input", function(){
         document.getElementById(`saveDatosManga${mangas.numero}`).addEventListener("click", ()=>{
             let dato1 = document.getElementById(`inputMangaCantCapitulosLeidos${mangas.numero}`).value
             let dato2 = document.getElementById(`inputPuntuacionManga${mangas.numero}`).value
+            
+            
+            if(dato2==undefined || dato1 == undefined || dato2 == ""|| dato1==""){
 
-            if (1 < dato2 < 10 && 0 < dato1){
-                if ( !isNaN(dato1) || !isNaN(dato2)){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los datos no son correctos',
+                })
+            }
+            else{
+                if ( !isNaN(dato1) && !isNaN(dato2)){
                 
-
-                    let auxiliarValue = document.getElementById(`saveDatosManga${mangas.numero}`).value
-
-                    let mangaConfig = arrayMangasSave.find(manguita => manguita.numero == auxiliarValue)
+                    if((1<dato2 && dato2<10) && (0<dato1 && dato1<=mangas.cantMaximaCap)){
                 
-                    let posicionM = arrayMangasSave.indexOf(mangaConfig)
+                        let auxiliarValue = document.getElementById(`saveDatosManga${mangas.numero}`).value
 
-                    arrayMangasSave[posicionM].cantCapitulosLeidos = dato1
-                    arrayMangasSave[posicionM].puntuacion = dato2
+                        let mangaConfig = arrayMangasSave.find(manguita => manguita.numero == auxiliarValue)
+                
+                        let posicionM = arrayMangasSave.indexOf(mangaConfig)
+
+                        arrayMangasSave[posicionM].cantCapitulosLeidos = dato1
+                        arrayMangasSave[posicionM].puntuacion = dato2
+
+                        
+
+                        localStorage.setItem("arrayMangas",JSON.stringify(arrayMangasSave))
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Se realizaron los cambios',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
                     
-                    localStorage.setItem("arrayMangas",JSON.stringify(arrayMangasSave))
-
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Se realizaron los cambios',
-                        showConfirmButton: false,
-                        timer: 2500
-                    })
-                    }
+                }
                 else{
                         Swal.fire({
                             icon: 'error',
@@ -257,10 +271,19 @@ buscador.addEventListener("input", function(){
                         })
                     }
             }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Los datos no son correctos',
+                })
+            }
+            } 
             
         })
     })
-        // Elimina el manga guardado
+    
+    // Elimina el manga guardado
     arrayMangasSave.forEach((mangas) => {
         // 
         document.getElementById(`botonEliminarManga${mangas.numero}`).addEventListener("click", ()=>{
@@ -278,7 +301,7 @@ buscador.addEventListener("input", function(){
 
             localStorage.setItem("arrayMangas",JSON.stringify(arrayMangasSave))
 
-            misMangas()
+            listaMisMangas()
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -286,14 +309,17 @@ buscador.addEventListener("input", function(){
                 showConfirmButton: false,
                 timer: 2500
             })
-            misMangas() 
         })
         
-    });  
+    });
+
+    // actualiza la vista de los mangas cuando se cierra el editor de datos
+    arrayMangasSave.forEach((mangas) => {
+        document.getElementById(`cerrarEditorManga${mangas.numero}`).addEventListener("click",()=>{
+            listaMisMangas()
+        })
+    })
 }
-
-
-
 // Muestra la lista pero de forma por defecto
 const botonAlfabeticamenteFuncion = ()=>{
     let mangaOrdenado = []
@@ -318,7 +344,7 @@ const mostrarMangasOrdenado = (mangaOrdenado) =>{
     let mangasdiv = document.getElementById("mangas") 
     mangasdiv.innerHTML=""
     // for (const manga of arrayMangas){ Esta linea me genero problemas pero no se como solucionarlos 
-    for(let mangas of arrayMangasSave){
+    for(let mangas of mangaOrdenado){
         if (mangas.cantCapitulosLeidos == null || mangas.puntuacion == null) {
             let mangaContenido = document.createElement('div');
             mangaContenido.innerHTML = `<div class="card" id = "miManga${mangas.numero}"style="width: 18rem;">
@@ -343,13 +369,13 @@ const mostrarMangasOrdenado = (mangaOrdenado) =>{
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                                <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
-                                                                                <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                            <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
+                                                            <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
+                                                            <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
+                                                            <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>
@@ -389,13 +415,13 @@ const mostrarMangasOrdenado = (mangaOrdenado) =>{
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                                <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
-                                                                                <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                            <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
+                                                            <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
+                                                            <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
+                                                            <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>
@@ -456,13 +482,13 @@ const mostrarMangasBusqueda = (mangaBuscado) =>{
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                                <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
-                                                                                <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                            <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
+                                                            <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
+                                                            <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
+                                                            <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>
@@ -502,13 +528,13 @@ const mostrarMangasBusqueda = (mangaBuscado) =>{
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                                <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
-                                                                                <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}">
-                                                                                <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
-                                                                                <input type="text" id="inputPuntuacionManga${mangas.numero}">
+                                                            <label for="inputMangaCantCapitulosLeidos">Ingresa la cantidad de capitulos que has leido</label>
+                                                            <input type="text" id="inputMangaCantCapitulosLeidos${mangas.numero}" placeholder="Max: ${mangas.cantMaximaCap}">
+                                                            <label for="inputPuntuacionManga">Dale una puntuacion al manga del 1 al 10</label>
+                                                            <input type="text" id="inputPuntuacionManga${mangas.numero}" placeholder=" 1 al 10">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="cerrarEditorManga${mangas.numero}" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button id ="saveDatosManga${mangas.numero}"value="${mangas.numero}" type="button" class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                         </div>

@@ -2,7 +2,7 @@
 
 let botonMisMangas = document.getElementById("misMangas")
 misMangas.addEventListener("click",function(){
-    misMangas() 
+    listaMisMangas() 
 })
 
 let botonBiblioteca = document.getElementById("botonBiblioteca")
