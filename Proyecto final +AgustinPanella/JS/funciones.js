@@ -1,4 +1,4 @@
-
+// funcion que trae la info del Json y la muestra 
 const getMangaArrayJson = async () =>{
     const response = await fetch('./JSON/mangas.json')
     data = await response.json();
@@ -76,6 +76,7 @@ const getMangaArrayJson = async () =>{
         })
     })
 }
+// Funcion que muestra los mangas guardados por el usuario. Mostrando filtros y buscador
 const listaMisMangas = () => {
 
     // edito el DOM para adecuarlo al nuevo 
