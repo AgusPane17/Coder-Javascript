@@ -10,5 +10,5 @@ Esta pagina cuenta con los siguientes elementos.
 - El agregar un manga a tu lista
 - Editar los mangas que e leido o quiero leer 
 
-En resumen ese es el funcionamiento del proyecto. 
+Es necesario ocupar la extencion de live server para abrir la pagina
 
